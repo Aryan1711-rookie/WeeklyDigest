@@ -30,11 +30,30 @@ Built using React, Redux, TailwindCss, framer-motion on the frontend with backen
 ☀️ MongoDB
 ☀️ Stripe
 
+#ScreenShots
+
+![alt text](./weeklyDigest/src/assets/image.png)
+![alt text](./weeklyDigest/src/assets/image1.png)
+![alt text](./weeklyDigest/src/assets/image2.png)
+![alt text](./weeklyDigest/src/assets/image3.png)
+
+
 💼 Installation
 
+#Run Locally!!! 
+
 #Clone the repo:
-cd 
+git clone https://github.com/Aryan1711-rookie/WeeklyDigest.git
+
+#frontend(weeklyDigest)
+cd weeklyDigest
+npm run dev
+
+#backend
+cd backend
+nodemon server.js or node server.js
+
+Visit to check the platform live:
+https://weeklydigest-blog.onrender.com/
 
 
-
- // "build" : "npm install  && npm install --prefix weeklyDigest && npm run build --prefix weeklyDigest",
