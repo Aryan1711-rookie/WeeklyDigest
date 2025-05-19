@@ -19,7 +19,7 @@ const useGetAllBlogs = (page = 1, limit = 5, category = '') => {
         // Build query string dynamically
         const query = `?page=${page}&limit=${limit}${category ? `&category=${encodeURIComponent(category)}` : ''}`;
 
-        const res = await axios.get(`http://localhost:5000/api/v1/blog/getBlogs${query}`, {
+        const res = await axios.get(`https://weeklydigest-4mry.onrender.com/api/v1/blog/getBlogs${query}`, {
           withCredentials: true
         });
 

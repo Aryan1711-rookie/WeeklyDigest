@@ -13,7 +13,7 @@ const Payment = () => {
         try {
 
             const stripe = await stripeLoad;
-            const response = await axios.post('http://localhost:5000/api/v1/blog/payment', {}, {
+            const response = await axios.post('https://weeklydigest-4mry.onrender.com/api/v1/blog/payment', {}, {
                 headers: { 'Content-Type': 'application/json' },
             });
 

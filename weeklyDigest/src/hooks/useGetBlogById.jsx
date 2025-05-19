@@ -12,7 +12,7 @@ const useGetBlogById = (id) => {
         if (!id) return;
         const fetchBlogById = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/blog/getBlog/${id}`, { withCredentials: true });
+                const res = await axios.get(`https://weeklydigest-4mry.onrender.com/api/v1/blog/getBlog/${id}`, { withCredentials: true });
                 if (res.data.success) {
                     dispatch(setBlogById(res.data.blog));
                     console.log(res.data.blog);

@@ -18,8 +18,8 @@ export const createCheckoutSession = async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:5173/paymentResult?status=success",
-      cancel_url: "http://localhost:5173/paymentResult?status=failed",
+      success_url: "https://weeklydigest-blog.onrender.com/paymentResult?status=success",
+      cancel_url: "https://weeklydigest-blog.onrender.com/paymentResult?status=failed",
     });
     res.json({ id: session.id });
   } catch (err) {

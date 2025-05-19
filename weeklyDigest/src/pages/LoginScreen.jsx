@@ -26,7 +26,7 @@ const LoginScreen = () => {
     try {
       dispatch(setLoading(true));
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/login",
+        "https://weeklydigest-4mry.onrender.com/api/v1/user/login",
         { email, password },
         {
           withCredentials: true,

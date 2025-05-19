@@ -67,7 +67,7 @@ const RegisterScreen = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/register",
+        "https://weeklydigest-4mry.onrender.com/api/v1/user/register",
         formData,
         {
           withCredentials: true,

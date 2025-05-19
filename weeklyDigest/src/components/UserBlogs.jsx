@@ -24,7 +24,7 @@ const UserBlogs = ({ userId }) => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v1/blog/user/${userId}?page=${page}&limit=${limit}`,
+          `https://weeklydigest-4mry.onrender.com/api/v1/blog/user/${userId}?page=${page}&limit=${limit}`,
           { withCredentials: true }
         );
         if (res?.data?.success) {
@@ -47,7 +47,7 @@ const UserBlogs = ({ userId }) => {
   const handleDelete = async (blogId) => {
     if(!window.confirm("Do you want to delete your writing")) return;
     try{
-      const res = await axios.delete(`http://localhost:5000/api/v1/blog/delete/${blogId}`,{
+      const res = await axios.delete(`https://weeklydigest-4mry.onrender.com/api/v1/blog/delete/${blogId}`,{
         withCredentials: true
       });
       toast.success(res.data.message || "Deleted Successfully");

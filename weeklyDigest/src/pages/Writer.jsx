@@ -63,7 +63,7 @@ const Writer = () => {
       console.warn("Blog not found in Redux. Consider fetching from API.");
       const fetchFromAPI = async () => {
         try {
-          const res = await axios.get(`http://localhost:5000/api/v1/blog/getBlog/${id}`, {
+          const res = await axios.get(`https://weeklydigest-4mry.onrender.com/api/v1/blog/getBlog/${id}`, {
             withCredentials: true,
           });
           if (res.data?.blog) {
@@ -122,7 +122,7 @@ const Writer = () => {
       setLoading(true);
       if (isEditMode) {
         const response = await axios.put(
-          `http://localhost:5000/api/v1/blog/updateBlog/${id}`,
+          `https://weeklydigest-4mry.onrender.com/api/v1/blog/updateBlog/${id}`,
           formData,
           {
             headers: {
@@ -138,7 +138,7 @@ const Writer = () => {
         }
       } else {
         const res = await axios.post(
-          "http://localhost:5000/api/v1/blog/create",
+          "https://weeklydigest-4mry.onrender.com/api/v1/blog/create",
           formData,
           {
             headers: { 'Content-Type': 'multipart/form-data' },
