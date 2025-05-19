@@ -12,8 +12,8 @@ env.config();
 const app = express();
 
 const router = express.Router();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,15 +32,15 @@ app.use('/api/v1/blog', blogs);
 
 
 
-app.use(express.static(path.join(__dirname, "/weeklyDigest/dist")));
+// app.use(express.static(path.join(__dirname, "/weeklyDigest/dist")));
 
-app.get(/^\/(?!api).*/, (req, res) => {
-  if (req.accepts('html')) {
-    res.sendFile(path.join(__dirname, '../weeklyDigest/dist/index.html'));
-  } else {
-    res.status(404).json({ error: 'Not found' });
-  }
-});
+// app.get(/^\/(?!api).*/, (req, res) => {
+//   if (req.accepts('html')) {
+//     res.sendFile(path.join(__dirname, '../weeklyDigest/dist/index.html'));
+//   } else {
+//     res.status(404).json({ error: 'Not found' });
+//   }
+// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {  
