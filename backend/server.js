@@ -33,7 +33,7 @@ app.use('/api/v1/blog', blogs);
 app.use(express.static(path.join(__dirname, "../weeklyDigest/dist")));
 
 app.get('/{*any}', (_, res) => {
-  res.sendFile(path.resolve(__dirname, "../weeklyDigest/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "weeklyDigest","dist", "index.html"));
 });
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
