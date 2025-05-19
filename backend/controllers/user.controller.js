@@ -147,7 +147,7 @@ export const updateProfile = async (req, res) => {
         resource_type: "image",
       });
 
-      updatedFields.profile.avatar = cloudRes.secure_url;
+      updatedFields.avatar = cloudRes.secure_url;
     }
 
     //updating on DB

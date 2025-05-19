@@ -2,13 +2,11 @@
   "name": "backend",
   "type": "module",
   "version": "1.0.0",
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon backend/server.js",
-   
-    "build" : "npm install && npm run build --prefix weeklyDigest",
-    "start" : "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "build": "npm install && npm install --prefix weeklyDigest && npm run build --prefix weeklyDigest",
+    "start": "nodemon backend/server.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +24,7 @@
     "mongoose": "^8.14.3",
     "multer": "^1.4.5-lts.2",
     "nodemon": "^3.1.10",
+    "path-to-regexp": "^8.2.0",
     "stripe": "^18.1.0"
   }
 }
