@@ -14,6 +14,7 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,13 +31,15 @@ app.use(cors(corsOptions));
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/blog', blogs);
 
-app.use(express.static(path.join(__dirname, "../weeklyDigest/dist")));
+app.use(express.static(path.join(__dirname, "/weeklyDigest/dist")));
 
 app.get('/{*any}', (_, res) => {
   res.sendFile(path.resolve(__dirname, "weeklyDigest","dist","index.html"));
 });
+
+
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
+app.listen(PORT, () => {  
     connectDB();
     console.log(`Server is running on ${PORT}`);
 })
