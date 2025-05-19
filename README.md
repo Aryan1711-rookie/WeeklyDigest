@@ -34,3 +34,7 @@ Built using React, Redux, TailwindCss, framer-motion on the frontend with backen
 
 #Clone the repo:
 cd 
+
+
+
+ // "build" : "npm install  && npm install --prefix weeklyDigest && npm run build --prefix weeklyDigest",
