@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon backend/server.js",
+    "build" : "npm install  && npm install --prefix weeklyDigest && npm run build --prefix weeklyDigest",
+    "start" : "nodemon backend/server.js"
   },
   "keywords": [],
   "author": "",
