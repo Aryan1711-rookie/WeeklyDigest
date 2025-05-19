@@ -37,14 +37,13 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-  expiresIn: "24h",
-});
+      expiresIn: "24h",
+    });
     return res.status(200).json({
       message: "User created successfully",
       success: true,
       user,
-      token
-      
+      token,
     });
   } catch (error) {
     console.log("Error -> ", error);
@@ -86,11 +85,17 @@ export const login = async (req, res) => {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      avatar: user.avatar
+      avatar: user.avatar,
     };
     return res
       .status(200)
-      .cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+      .cookie("token", token, {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+      })
+
       .json({
         message: "User signed in successfully",
         success: true,
