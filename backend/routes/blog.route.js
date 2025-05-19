@@ -1,0 +1,14 @@
+import express from 'express';
+import { createBlog, deleteBlog, getBlogById, getBlogs, getBlogsByUser, reactToBlog, updateBlog } from '../controllers/blog.controller.js';
+import isAuthenticated from '../middlewares/isAuthenticated.js';
+import { memoryUpload } from '../middlewares/multer.js';
+import { createCheckoutSession } from '../controllers/payment.controller.js';
+const router = express.Router();
+router.route("/create").post(isAuthenticated,memoryUpload,createBlog);
+router.route("/updateBlog/:id").put(isAuthenticated,memoryUpload,updateBlog);
+router.route("/getBlogs").get(getBlogs);
+router.route("/getBlog/:id").get(getBlogById);
+router.route("/delete/:id").delete(isAuthenticated, deleteBlog);
+router.route("/user/:id").get(isAuthenticated, getBlogsByUser);
+router.route("/payment").post(createCheckoutSession);
+export default router;
