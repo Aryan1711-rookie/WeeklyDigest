@@ -5,8 +5,7 @@ import env from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoutes from "./routes/user.route.js";
 import blogs from "./routes/blog.route.js";
-import path from "path";
-import { fileURLToPath } from "url";
+
 
 env.config();
 const app = express();
