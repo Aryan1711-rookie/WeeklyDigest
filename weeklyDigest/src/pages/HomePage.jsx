@@ -106,7 +106,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
         <div className="text-center md:text-left md:w-1/2 mb-8 md:mb-0">
-          <h1 className="text-3xl  md:text-8xl  font-bold mb-4 leading-tight">
+          <h1 className="text-4xl  md:text-8xl  font-bold mb-4 leading-tight">
             New Day, New Story, New Idea
           </h1>
           <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-gray-600">
