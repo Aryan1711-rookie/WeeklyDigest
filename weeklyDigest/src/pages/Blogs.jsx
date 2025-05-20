@@ -43,7 +43,7 @@ const Blogs = () => {
         <hr className="border-gray-200 mb-8" />
 
       {/* Filtering Section Based on Tags */}
-      <div className="flex flex-wrap justify-center gap-1 md:gap-3 mb-6">
+      <div className="flex flex-wrap justify-center gap-5 md:gap-3 mb-6">
         <button
           onClick={() => handleCategoryChange("")}
           className={`px-4 py-2 rounded-full text-sm font-semibold ${category === "" ? "bg-green-600 text-white" : "bg-gray-200 text-gray-700"
