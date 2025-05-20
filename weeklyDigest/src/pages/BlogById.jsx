@@ -23,7 +23,7 @@ const BlogById = () => {
     );
   }
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return (
@@ -57,9 +57,9 @@ const BlogById = () => {
           )}
 
           {/* Article Content */}
-          <div className="p-6 sm:p-8">
+          <div className="p-4 sm:p-8">
             {/* Categories */}
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1 mb-4 md:gap-2">
               {Array.isArray(blog.category) ? (
                 blog.category.map((cat, i) => (
                   <span
