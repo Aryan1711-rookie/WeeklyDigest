@@ -22,9 +22,9 @@ const BlogById = () => {
       </div>
     );
   }
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
