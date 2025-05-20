@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 import UserPopover from "../components/UserPopover";
 import { useDispatch, useSelector } from "react-redux";
 import { setBlogById } from "../redux/blogSlice.js";
+
 const Writer = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
   const { blogs, blogById } = useSelector((state) => state.blog);
-  const [bannerUrl, setBannerUrl] = useState(null);
+
   const isEditMode = Boolean(id);
   const [input, setInput] = useState({
     title: '',
@@ -19,6 +20,7 @@ const Writer = () => {
     category: '',
     banner: null
   });
+
   const [selectedTags, setSelectedTags] = useState([]);
 
   const changeEventHandler = (e) => {
@@ -44,28 +46,25 @@ const Writer = () => {
   };
 
   const handleDraft = () => {
-    localStorage.setItem('draft', JSON.stringify({
-      ...input,
-      selectedTags
-    }));
+    localStorage.setItem('draft', JSON.stringify({ ...input, selectedTags }));
     toast.success("Draft saved locally", {
       position: "bottom-right",
       autoClose: 1500,
     });
   };
+
   useEffect(() => {
     if (!id) return;
     const existingBlog = blogs.find((b) => b._id === id);
     if (existingBlog) {
       dispatch(setBlogById(existingBlog));
     } else {
-      // Fallback: fetch from backend
-      console.warn("Blog not found in Redux. Consider fetching from API.");
       const fetchFromAPI = async () => {
         try {
-          const res = await axios.get(`https://weeklydigest-4mry.onrender.com/api/v1/blog/getBlog/${id}`, {
-            withCredentials: true,
-          });
+          const res = await axios.get(
+            `https://weeklydigest-4mry.onrender.com/api/v1/blog/getBlog/${id}`,
+            { withCredentials: true }
+          );
           if (res.data?.blog) {
             dispatch(setBlogById(res.data.blog));
           }
@@ -82,7 +81,7 @@ const Writer = () => {
       setInput({
         title: blogById.title || '',
         content: blogById.content || '',
-        category: blogById.category || '',
+        category: '', // Don't prefill with array
         banner: blogById.banner || null
       });
       setSelectedTags(blogById.category || []);
@@ -91,32 +90,23 @@ const Writer = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     if (!input.title || !input.content) {
       toast.error("Title and content are required");
       return;
     }
 
     const formData = new FormData();
-
-    // Append all required fields
     formData.append('title', input.title);
     formData.append('content', input.content);
     formData.append('category', selectedTags.join(','));
+
     if (input.banner) {
       if (input.banner instanceof File) {
-        // New file upload
         formData.append('banner', input.banner);
       } else if (typeof input.banner === 'string') {
-        // Existing image URL
         formData.append('bannerUrl', input.banner);
       }
     }
-
-    // Debug: Log FormData contents
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
 
     try {
       setLoading(true);
@@ -134,7 +124,7 @@ const Writer = () => {
 
         if (response.data.success) {
           toast.success("Blog Updated Successfully");
-          navigate(`/blog/${id}`); // Redirect to updated blog
+          navigate(`/blog/${id}`);
         }
       } else {
         const res = await axios.post(
@@ -168,7 +158,6 @@ const Writer = () => {
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8 sm:py-12">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="relative flex items-center mb-6 px-4 sm:px-0 max-w-7xl mx-auto">
           <h1
             title="back to 'Home'"
@@ -184,7 +173,6 @@ const Writer = () => {
 
         <hr className="border-gray-200 mb-8" />
 
-        {/* Intro */}
         <div className="text-center mb-10 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 font-serif mb-2">
             Craft Your Story
@@ -194,9 +182,10 @@ const Writer = () => {
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={submitHandler} className="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100 space-y-8">
-          {/* Upload Banner */}
+        <form
+          onSubmit={submitHandler}
+          className="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100 space-y-8"
+        >
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
               Featured Image
@@ -218,7 +207,7 @@ const Writer = () => {
                     />
                   </svg>
                   <p className="pt-1 text-sm text-gray-600">
-                    {input.banner ? input.banner.name : "Click to upload or drag and drop"}
+                    {input.banner?.name || "Click to upload or drag and drop"}
                   </p>
                   <p className="text-xs text-gray-500 mt-1">
                     PNG, JPG up to 5MB
@@ -236,7 +225,6 @@ const Writer = () => {
             </div>
           </div>
 
-          {/* Title */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
               Title *
@@ -252,7 +240,6 @@ const Writer = () => {
             />
           </div>
 
-          {/* Content */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
               Your Story *
@@ -268,7 +255,6 @@ const Writer = () => {
             />
           </div>
 
-          {/* Tags */}
           <div className="space-y-3">
             <label className="block text-sm font-medium text-gray-700">
               Tags (Select up to 3)
@@ -278,25 +264,18 @@ const Writer = () => {
                 <div
                   key={tag}
                   onClick={() => handleTagSelect(tag)}
-                  className={`inline-flex items-center px-3 py-2 rounded-full transition-colors cursor-pointer ${selectedTags.includes(tag)
-                    ? "bg-green-100 text-green-800"
-                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                    }`}
+                  className={`inline-flex items-center px-3 py-2 rounded-full transition-colors cursor-pointer ${
+                    selectedTags.includes(tag)
+                      ? "bg-green-100 text-green-800"
+                      : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                  }`}
                 >
                   <span className="text-sm">{tag}</span>
                 </div>
               ))}
             </div>
-            {selectedTags.length > 0 && (
-              <input
-                type="hidden"
-                name="category"
-                value={selectedTags.join(',')}
-              />
-            )}
           </div>
 
-          {/* Action Buttons */}
           <div className="flex justify-end space-x-4 pt-4">
             <button
               type="button"
@@ -309,16 +288,22 @@ const Writer = () => {
             <button
               type="submit"
               disabled={loading || !input.title || !input.content}
-              className={`px-6 py-2.5 text-sm font-medium text-white rounded-lg transition-colors focus:ring-2 focus:ring-offset-2 ${loading || !input.title || !input.content
+              className={`px-6 py-2.5 text-sm font-medium text-white rounded-lg transition-colors focus:ring-2 focus:ring-offset-2 ${
+                loading || !input.title || !input.content
                   ? "bg-gray-400 cursor-not-allowed"
                   : isEditMode
                     ? "bg-red-600 hover:bg-red-700 focus:ring-red-500"
                     : "bg-green-600 hover:bg-green-700 focus:ring-green-500"
-                }`}
+              }`}
             >
-              {loading ? (isEditMode ? "Republishing..." : "Publishing...") : (isEditMode ? "Republish" : "Publish Story")}
+              {loading
+                ? isEditMode
+                  ? "Republishing..."
+                  : "Publishing..."
+                : isEditMode
+                ? "Republish"
+                : "Publish Story"}
             </button>
-
           </div>
         </form>
       </div>
