@@ -32,7 +32,7 @@ const Blogs = () => {
           <h1
             title="back to 'Home'"
             onClick={() => navigate("/")}
-            className="absolute left-1/2 transform -translate-x-1/2 text-green-700 font-serif font-bold text-3xl sm:text-4xl cursor-pointer hover:text-green-800 transition-colors select-none"
+            className="absolute left-1/2 transform -translate-x-1/2 text-green-700 font-serif font-bold text-xl sm:text-4xl cursor-pointer hover:text-green-800 transition-colors select-none"
           >
             Weekly Digest
           </h1>

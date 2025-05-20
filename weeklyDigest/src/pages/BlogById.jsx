@@ -4,6 +4,7 @@ import useGetBlogById from "../hooks/useGetBlogById";
 import { FiArrowLeft } from "react-icons/fi";
 import moment from "moment";
 import Payment from "../components/Payment";
+import { useEffect } from "react";
 
 const BlogById = () => {
   
@@ -21,6 +22,9 @@ const BlogById = () => {
       </div>
     );
   }
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
